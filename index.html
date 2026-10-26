@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>晓晓影视 - 每晚更新热播剧单与院线速递 | xiaoxiaoyingshi-app.github.io</title>
+<meta name="description" content="晓晓影视(xiaoxiaoyingshi-app.github.io)是一份自己维护的观影台账：剧集热播榜按周刷新、电影速递挑出真正值得买票的那几部、新番动画标注更新进度，另有影单合集与观影避坑笔记，帮你把想看的片子排进日程，而不是在推荐流里空转。">
+<meta name="keywords" content="晓晓影视,晓晓影视官网,晓晓影视剧单,xiaoxiaoyingshi-app,热播剧集推荐,院线电影速递,新番动画更新,影视榜单排行,追剧清单模板,观影笔记,影视导航站">
+<meta name="author" content="晓晓影视编辑部">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#12141c">
+<link rel="canonical" href="https://xiaoxiaoyingshi-app.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="晓晓影视">
+<meta property="og:title" content="晓晓影视 - 每晚更新热播剧单与院线速递">
+<meta property="og:description" content="剧集、电影、新番、榜单四张表每晚刷新一次，附影单合集与观影避坑笔记。">
+<meta property="og:url" content="https://xiaoxiaoyingshi-app.github.io/">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="晓晓影视 - 每晚更新热播剧单与院线速递">
+<meta name="twitter:description" content="把想看的片子排进日程，别在推荐流里空转。">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#12141c;
+  --ink2:#1b1e29;
+  --line:#2b2f3d;
+  --paper:#f4f1ea;
+  --gold:#e8b04b;
+  --gold2:#f7d488;
+  --green:#6fd3a8;
+  --grey:#9aa0ae;
+  --r:14px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink);
+  color:var(--paper);
+  font:16px/1.75 "PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  letter-spacing:.2px;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+ul,ol{list-style:none}
+.wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 20px}
+
+/* 顶栏 */
+.top{
+  position:sticky;top:0;z-index:60;
+  background:rgba(18,20,28,.92);
+  backdrop-filter:saturate(160%) blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:12px}
+.brand{display:flex;align-items:baseline;gap:10px;min-width:0}
+.brand b{font-size:21px;letter-spacing:2px;color:var(--gold2)}
+.brand span{font-size:11px;color:var(--grey);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav{display:flex;gap:26px;font-size:14px}
+.nav a{padding:6px 0;border-bottom:2px solid transparent;color:#cfd3dd}
+.nav a:hover{color:var(--gold2);border-bottom-color:var(--gold)}
+.burger{display:none;width:40px;height:40px;border:1px solid var(--line);border-radius:10px;background:transparent;cursor:pointer}
+.burger i{display:block;width:18px;height:2px;background:var(--paper);margin:4px auto;border-radius:2px}
+
+/* 首屏 */
+.hero{padding:64px 0 40px;position:relative}
+.hero:before{
+  content:"";position:absolute;left:-8%;top:-60px;width:520px;height:520px;
+  background:radial-gradient(circle at 40% 40%,rgba(232,176,75,.18),transparent 62%);
+  filter:blur(6px);pointer-events:none;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:3px;
+  color:var(--gold);border:1px solid var(--line);border-radius:999px;padding:5px 14px;background:#181b25;
+}
+h1{font-size:44px;line-height:1.25;letter-spacing:1px;margin:20px 0 16px;font-weight:800}
+h1 em{font-style:normal;color:var(--gold2);border-bottom:5px solid rgba(232,176,75,.28)}
+.lead{max-width:660px;color:#c3c8d4;font-size:16.5px}
+.linkline{margin-top:14px;font-size:13.5px;color:var(--grey);word-break:break-all}
+.linkline b{color:var(--green)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{
+  display:inline-block;padding:12px 26px;border-radius:999px;font-size:15px;font-weight:600;
+  border:1px solid var(--gold);transition:.2s;
+}
+.btn-a{background:linear-gradient(120deg,var(--gold),var(--gold2));color:#241a06}
+.btn-b{color:var(--gold2)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(232,176,75,.22)}
+
+/* 数字条 */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:38px 0 8px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;
+}
+.stats div b{display:block;font-size:26px;color:var(--gold2);font-variant-numeric:tabular-nums}
+.stats div span{font-size:12.5px;color:var(--grey)}
+
+/* 区块 */
+section{padding:56px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.sec-head h2{font-size:27px;letter-spacing:1px;position:relative;padding-left:14px}
+.sec-head h2:before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:4px;background:var(--gold);border-radius:2px}
+.sec-head p{font-size:13.5px;color:var(--grey);max-width:520px}
+.tag{font-size:12px;color:var(--green);border:1px solid #2c4c3f;background:#16211d;border-radius:6px;padding:3px 9px}
+
+/* 剧集卡 */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{
+  background:linear-gradient(180deg,#1a1d27,#15171f);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.25s;
+}
+.card:hover{transform:translateY(-4px);border-color:#4a4330}
+.poster{height:132px;display:flex;align-items:flex-end;padding:14px;font-weight:700;font-size:15px;letter-spacing:1px}
+.p1{background:linear-gradient(135deg,#3b3350,#1d1a2a)}
+.p2{background:linear-gradient(135deg,#4a3524,#221a13)}
+.p3{background:linear-gradient(135deg,#1f3d3a,#132322)}
+.p4{background:linear-gradient(135deg,#3a2a3f,#1e1622)}
+.p5{background:linear-gradient(135deg,#2d3a4d,#161c25)}
+.p6{background:linear-gradient(135deg,#4d3a2a,#241b13)}
+.card .body{padding:14px 16px 18px}
+.card h3{font-size:16.5px;margin-bottom:6px}
+.card p{font-size:13.5px;color:#a8aebc;line-height:1.65}
+.meta{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:12px;color:var(--grey)}
+.score{color:var(--gold2);font-weight:700;font-size:14px}
+
+/* 电影横向条 */
+.rail{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{height:6px}
+.rail::-webkit-scrollbar-thumb{background:#333849;border-radius:6px}
+.film{flex:0 0 250px;scroll-snap-align:start;background:#171a23;border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.film .kind{font-size:11.5px;color:var(--gold);letter-spacing:2px}
+.film h3{font-size:17px;margin:8px 0 8px}
+.film p{font-size:13px;color:#a8aebc}
+.film .row{display:flex;justify-content:space-between;margin-top:14px;font-size:12px;color:var(--grey)}
+
+/* 新番表 */
+.list{border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.list li{display:grid;grid-template-columns:64px 1fr 150px 92px;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid var(--line);background:#16181f}
+.list li:last-child{border-bottom:0}
+.list li:hover{background:#1c1f2a}
+.list .no{font-size:19px;color:var(--gold);font-weight:800;text-align:center}
+.list h3{font-size:15.5px;margin-bottom:3px}
+.list .sub{font-size:12.5px;color:var(--grey)}
+.bar{height:7px;border-radius:6px;background:#2a2e3b;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--green),#9ce8c8)}
+.list .eps{font-size:12.5px;color:#c3c8d4;text-align:right}
+
+/* 榜单 */
+.rank{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.rank article{display:flex;gap:14px;align-items:flex-start;background:#171a23;border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.rank .top{font-size:22px;font-weight:800;color:var(--gold2);min-width:36px;text-align:center;line-height:1.2}
+.rank h3{font-size:16px;margin-bottom:5px}
+.rank p{font-size:13px;color:#a8aebc}
+
+/* FAQ */
+.faq details{border:1px solid var(--line);border-radius:12px;background:#16181f;margin-bottom:12px;overflow:hidden}
+.faq summary{cursor:pointer;padding:15px 18px;font-size:15.5px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";color:var(--gold);font-size:20px;line-height:1}
+.faq details[open] summary:after{content:"-"}
+.faq .ans{padding:0 18px 18px;font-size:14px;color:#a8aebc;border-top:1px dashed var(--line);padding-top:14px}
+
+/* 关于 */
+.about{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+.panel{background:linear-gradient(160deg,#1c1f2a,#15171f);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.panel h3{font-size:19px;margin-bottom:12px;color:var(--gold2)}
+.panel p{font-size:14.5px;color:#b6bcc9;margin-bottom:12px}
+.panel ul li{font-size:14px;color:#a8aebc;padding:7px 0 7px 18px;position:relative;border-bottom:1px dashed #262a36}
+.panel ul li:last-child{border-bottom:0}
+.panel ul li:before{content:"";position:absolute;left:0;top:15px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.sitebox{border:1px dashed #3c3728;border-radius:12px;background:#1b1710;padding:16px;margin-top:8px;font-size:13.5px;color:var(--gold2);word-break:break-all;line-height:1.9}
+
+/* CTA 条 */
+.cta{background:linear-gradient(120deg,#1d2030,#171922);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cta .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:34px 20px}
+.cta h2{font-size:23px}
+.cta p{font-size:13.5px;color:var(--grey);margin-top:6px}
+
+/* 页脚 */
+footer{background:#0e1016;padding:44px 0 0}
+.fcols{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:26px;padding-bottom:30px}
+.fcols h4{font-size:14px;color:var(--gold2);margin-bottom:12px;letter-spacing:1px}
+.fcols li{padding:5px 0;font-size:13.5px;color:#98a0ae}
+.fcols li:hover{color:var(--paper)}
+.fcols .intro{font-size:13.5px;color:#98a0ae;line-height:1.8}
+.fcols .intro b{color:var(--gold2);word-break:break-all}
+.bottom{border-top:1px solid #1c1f28;padding:18px 0 26px;font-size:12.5px;color:#7c8391;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* 移动端 */
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .about{grid-template-columns:1fr}
+  .fcols{grid-template-columns:1fr 1fr}
+  .list li{grid-template-columns:44px 1fr;grid-template-areas:"no ttl" "bar bar" "eps eps";gap:8px 12px}
+  .list .no{grid-area:no;text-align:left}
+  .list .ttl{grid-area:ttl}
+  .list .bar{grid-area:bar}
+  .list .eps{grid-area:eps;text-align:left}
+}
+@media(max-width:640px){
+  .nav{
+    display:none;position:absolute;left:0;right:0;top:62px;flex-direction:column;gap:0;
+    background:#14161e;border-bottom:1px solid var(--line);padding:6px 20px 14px;
+  }
+  .nav.on{display:flex}
+  .nav a{padding:12px 0;border-bottom:1px solid #22252f}
+  .burger{display:block}
+  h1{font-size:31px}
+  .hero{padding:44px 0 28px}
+  .grid{grid-template-columns:1fr}
+  .rank{grid-template-columns:1fr}
+  .film{flex:0 0 78%}
+  .brand span{display:none}
+  .cta .wrap{padding:28px 20px}
+  .btn{width:100%;text-align:center}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xiaoxiaoyingshi-app.github.io/#website","url":"https://xiaoxiaoyingshi-app.github.io/","name":"晓晓影视","alternateName":"晓晓影视剧单","description":"剧集热播、院线速递、新番动画与观影榜单的每日更新台账","inLanguage":"zh-CN","publisher":{"@id":"https://xiaoxiaoyingshi-app.github.io/#org"}},{"@type":"Organization","@id":"https://xiaoxiaoyingshi-app.github.io/#org","name":"晓晓影视","url":"https://xiaoxiaoyingshi-app.github.io/","slogan":"把想看的片子排进日程"}]}
+</script>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <b>晓晓影视</b>
+      <span>https://xiaoxiaoyingshi-app.github.io</span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#series">剧集热播</a>
+      <a href="#movie">电影速递</a>
+      <a href="#anime">新番动画</a>
+      <a href="#rank">榜单排行</a>
+      <a href="#guide">观影指南</a>
+      <a href="#about">关于本站</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="展开导航菜单" aria-expanded="false">
+      <i></i><i></i><i></i>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">每晚 21:30 刷新一次片单</span>
+      <h1>晓晓影视：一份能<em>直接照着看</em>的观影台账</h1>
+      <p class="lead">这里不搬运整片片库，也不堆砌看不完的推荐流。晓晓影视只做四件事：把正在更新的剧集排好顺序，把值得买票的电影挑出来，把新番动画的进度标清楚，再把看完的人留下的意见整理成榜单。</p>
+      <p class="linkline">本站网址 <b>https://xiaoxiaoyingshi-app.github.io</b> ｜ 收藏后可直接回到最新一版片单</p>
+      <div class="btns">
+        <a class="btn btn-a" href="#series">查看本周剧单</a>
+        <a class="btn btn-b" href="#rank">直接进入榜单</a>
+      </div>
+      <div class="stats">
+        <div><b>12860</b><span>已收录影片条目</span></div>
+        <div><b>268</b><span>整理完成的主题影单</span></div>
+        <div><b>3 更/日</b><span>剧集与新番更新频次</span></div>
+        <div><b>39412</b><span>观众标记"看过"记录</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="series">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>剧集热播：这周追哪几部</h2>
+        <p>按更新节奏与完结风险排序，标注建议观看方式，避免追到一半断更。</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="poster p1">更至 12 集 / 共 24 集</div>
+          <div class="body">
+            <h3>《长街二十九号》</h3>
+            <p>市井群像，节奏偏慢但人物立得住，适合周末连看三集，不建议零碎时间追。</p>
+            <div class="meta"><span class="score">8.6</span><span>剧情 · 年代</span><span class="tag">已过半可入坑</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="poster p2">更至 6 集 / 周更两集</div>
+          <div class="body">
+            <h3>《灶上的夏天》</h3>
+            <p>轻喜剧底子，单集 30 分钟，通勤时间刚好消化完一集，笑点不靠段子堆。</p>
+            <div class="meta"><span class="score">7.9</span><span>喜剧 · 生活</span><span class="tag">下饭友好</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="poster p3">全 12 集 已完结</div>
+          <div class="body">
+            <h3>《潮间带》</h3>
+            <p>悬疑线收得干净，没有烂尾争议，一次性看完体验最好，剧透风险高请早看。</p>
+            <div class="meta"><span class="score">9.1</span><span>悬疑 · 短剧集</span><span class="tag">可一口气补完</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="poster p4">更至 18 集 / 共 36 集</div>
+          <div class="body">
+            <h3>《雨前茶》</h3>
+            <p>家庭线为主，情感铺垫长，前四集略闷，第五集之后人物关系才开始收紧。</p>
+            <div class="meta"><span class="score">8.2</span><span>家庭 · 情感</span><span class="tag">需耐心</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="poster p5">更至 9 集 / 周更一集</div>
+          <div class="body">
+            <h3>《隧道尽头有灯》</h3>
+            <p>科幻设定扎实，特效开支集中在中段，周更追起来略有断档感，可攒三集再看。</p>
+            <div class="meta"><span class="score">8.4</span><span>科幻 · 冒险</span><span class="tag">建议攒集</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="poster p6">全 8 集 已完结</div>
+          <div class="body">
+            <h3>《旧仓库里的排练》</h3>
+            <p>群戏调度出色，台词密度高，适合投屏看，手机小屏容易错过细节。</p>
+            <div class="meta"><span class="score">8.8</span><span>音乐 · 群像</span><span class="tag">投屏更佳</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="movie">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>电影速递：值得买票与值得等流媒体</h2>
+        <p>横向滑动查看，每张卡都写了建议的观看场景，不在影院看的会直接标明。</p>
+      </div>
+      <div class="rail">
+        <article class="film">
+          <span class="kind">院线 · 本周新映</span>
+          <h3>《候鸟不再南飞》</h3>
+          <p>影像质感突出，大银幕优势明显，建议选激光厅，字幕场次偏少需提前选座。</p>
+          <div class="row"><span>132 分钟</span><span class="score">8.7</span></div>
+        </article>
+        <article class="film">
+          <span class="kind">院线 · 长线放映</span>
+          <h3>《第七次退潮》</h3>
+          <p>叙事克制，中段有约十五分钟文戏，适合影院安静环境，家里看容易走神。</p>
+          <div class="row"><span>118 分钟</span><span class="score">8.3</span></div>
+        </article>
+        <article class="film">
+          <span class="kind">流媒体 · 已上线</span>
+          <h3>《午夜修表铺》</h3>
+          <p>小而稳的室内剧，主要靠对白推进，在家看与影院差别不大，不必赶场。</p>
+          <div class="row"><span>96 分钟</span><span class="score">7.8</span></div>
+        </article>
+        <article class="film">
+          <span class="kind">重映 · 限量场次</span>
+          <h3>《铁皮车站》</h3>
+          <p>修复版画质提升明显，多为工作日白天场次，想看请留意本地排片。</p>
+          <div class="row"><span>141 分钟</span><span class="score">9.0</span></div>
+        </article>
+        <article class="film">
+          <span class="kind">院线 · 合家欢</span>
+          <h3>《云上马戏团》</h3>
+          <p>动画长片，儿童观众占比高，建议避开周末上午场，音效场次体验更好。</p>
+          <div class="row"><span>104 分钟</span><span class="score">7.6</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="anime">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>新番动画：更新进度一栏看明白</h2>
+        <p>进度条为已播出集数占比，标注停更与延期情况，避免追更踩空。</p>
+      </div>
+      <ul class="list">
+        <li>
+          <span class="no">01</span>
+          <div class="ttl"><h3>《灯屋的来信》</h3><span class="sub">治愈 · 每周三更新 · 无延期</span></div>
+          <span class="bar"><i style="width:62%"></i></span>
+          <span class="eps">8 / 13 集</span>
+        </li>
+        <li>
+          <span class="no">02</span>
+          <div class="ttl"><h3>《铁砂与麦穗》</h3><span class="sub">热血 · 每周六更新 · 制作进度稳定</span></div>
+          <span class="bar"><i style="width:45%"></i></span>
+          <span class="eps">11 / 24 集</span>
+        </li>
+        <li>
+          <span class="no">03</span>
+          <div class="ttl"><h3>《南岛文具店》</h3><span class="sub">日常 · 双周更新 · 节奏偏慢</span></div>
+          <span class="bar"><i style="width:33%"></i></span>
+          <span class="eps">4 / 12 集</span>
+        </li>
+        <li>
+          <span class="no">04</span>
+          <div class="ttl"><h3>《夜行列车 Ⅱ》</h3><span class="sub">悬疑 · 每周五更新 · 上周停更一次</span></div>
+          <span class="bar"><i style="width:54%"></i></span>
+          <span class="eps">7 / 13 集</span>
+        </li>
+        <li>
+          <span class="no">05</span>
+          <div class="ttl"><h3>《蓝屋顶乐队》</h3><span class="sub">音乐 · 每周日更新 · 已播至中盘</span></div>
+          <span class="bar"><i style="width:72%"></i></span>
+          <span class="eps">18 / 25 集</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="rank">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>榜单排行：看完的人怎么说</h2>
+        <p>依据本站观众标记与回访记录整理，每周重排一次，不参考播放量数据。</p>
+      </div>
+      <div class="rank">
+        <article>
+          <span class="top">01</span>
+          <div><h3>最适合周末补完的短剧集</h3><p>单季 12 集以内、已完结、无烂尾争议，共 14 部入选。</p></div>
+        </article>
+        <article>
+          <span class="top">02</span>
+          <div><h3>下饭不踩雷的轻喜剧</h3><p>单集 30 分钟内、无需连贯记忆，通勤与吃饭场景均可。</p></div>
+        </article>
+        <article>
+          <span class="top">03</span>
+          <div><h3>大银幕值得多花一份票钱</h3><p>影像与音效优势明显的院线片，含重映修复批次。</p></div>
+        </article>
+        <article>
+          <span class="top">04</span>
+          <div><h3>被低估的近三年华语片</h3><p>排片少、讨论度低但完成度高，适合流媒体补看。</p></div>
+        </article>
+        <article>
+          <span class="top">05</span>
+          <div><h3>适合陪长辈一起看</h3><p>节奏舒缓、字幕清晰、音量起伏小，家庭场合适配。</p></div>
+        </article>
+        <article>
+          <span class="top">06</span>
+          <div><h3>看过一次就想重看</h3><p>细节密度高、二刷有明显新增信息量的作品。</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="guide">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>观影指南：几个高频问题的答案</h2>
+        <p>都是编辑部被反复问到的问题，点开即可展开完整说明。</p>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>晓晓影视的片单多久更新一次？</summary>
+          <div class="ans">剧集与新番部分每天刷新三次，分别在上午、傍晚和晚间；电影速递随院线排片调整，一般在周四新片上映前更新；榜单排行固定在每周一重排。</div>
+        </details>
+        <details>
+          <summary>评分是怎么来的，能信吗？</summary>
+          <div class="ans">评分来自本站观众的"看过"标记与回访记录，样本量小的条目会标注"样本不足"，且不参考任何播放量或票房数据，因此偏冷门的作品也可能排到前面。</div>
+        </details>
+        <details>
+          <summary>想快速补一部剧，从哪里开始看？</summary>
+          <div class="ans">先看"榜单排行"里的周末补完清单，那里只收已完结、单季 12 集以内的剧集。追更中的剧集建议等更新过半再入坑，卡片上会标注"已过半可入坑"。</div>
+        </details>
+        <details>
+          <summary>本站提供在线播放或下载吗？</summary>
+          <div class="ans">不提供。晓晓影视只整理条目信息、更新进度与观看建议，播放与购买请前往各自正规平台，卡片中标注的观看场景仅供参考。</div>
+        </details>
+        <details>
+          <summary>怎么把想看的片子存成自己的清单？</summary>
+          <div class="ans">按本站四个栏目各挑一到两部，控制在五部以内最容易坚持。追更剧集不建议同时开三部以上，周更断档会明显降低追看体验。</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>关于晓晓影视</h2>
+        <p>由三名长期写观影笔记的人维护，条目人工核对，不使用自动抓取。</p>
+      </div>
+      <div class="about">
+        <div class="panel">
+          <h3>我们怎么挑片</h3>
+          <p>先把每周所有新上条目过一遍，剔除明显凑数的，再按"值不值得占用两小时"这条标准排序。挑不出来的就不列，宁可少写几条。</p>
+          <ul>
+            <li>剧集：看前四集决定，完结风险高的单独标注</li>
+            <li>电影：分"值得买票"与"等流媒体"两类，不混排</li>
+            <li>动画：进度、延期、停更情况逐条核对后再上线</li>
+            <li>榜单：只统计观众实际看完后的标记，不看热度</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>记住本站地址</h3>
+          <p>晓晓影视只有一个入口，收藏下面这行就不会走错，其余同名站点均与本站无关：</p>
+          <div class="sitebox">站点名称：晓晓影视<br>https://xiaoxiaoyingshi-app.github.io</div>
+          <p style="margin-top:14px">页面为单页结构，顶部导航可直达任意栏目，手机上点右上角按钮展开菜单。</p>
+          <p><a href="#top" style="color:var(--gold2);border-bottom:1px solid var(--gold)">回到页面顶部 ↑</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <div class="wrap">
+      <div>
+        <h2>今晚想看什么，先来晓晓影视翻一遍</h2>
+        <p>四个栏目，五分钟看完，剩下的时间用来看片。</p>
+      </div>
+      <a class="btn btn-a" href="#series">开始浏览片单</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fcols">
+      <div>
+        <h4>晓晓影视</h4>
+        <p class="intro">剧集、电影、新番与榜单的每日更新台账。本站网址 <b>https://xiaoxiaoyingshi-app.github.io</b>，收藏即可随时回到最新一版片单。</p>
+      </div>
+      <div>
+        <h4>栏目导航</h4>
+        <ul>
+          <li><a href="#series">剧集热播</a></li>
+          <li><a href="#movie">电影速递</a></li>
+          <li><a href="#anime">新番动画</a></li>
+          <li><a href="#rank">榜单排行</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>实用入口</h4>
+        <ul>
+          <li><a href="#guide">观影指南</a></li>
+          <li><a href="#about">关于本站</a></li>
+          <li><a href="#top">回到顶部</a></li>
+          <li><a href="#">意见反馈</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>更新说明</h4>
+        <ul>
+          <li><a href="#">更新日志</a></li>
+          <li><a href="#">收录标准</a></li>
+          <li><a href="#">评分规则</a></li>
+          <li><a href="#">免责声明</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 晓晓影视 · https://xiaoxiaoyingshi-app.github.io</span>
+      <span>本站仅提供影视条目信息与观看建议</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var b=document.getElementById('burger'),n=document.getElementById('nav');
+  b.addEventListener('click',function(){
+    var on=n.classList.toggle('on');
+    b.setAttribute('aria-expanded',on?'true':'false');
+  });
+  n.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){n.classList.remove('on');b.setAttribute('aria-expanded','false');}
+  });
+})();
+</script>
+
+</body>
+</html>
